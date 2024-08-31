@@ -1,3 +1,11 @@
+---
+layout: default
+title: Welcome
+---
+
+<link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+<script src="{{ '/assets/js/script.js' | relative_url }}"></script>
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/M4GiK/M4GiK.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
