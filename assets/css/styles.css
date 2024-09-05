@@ -1,3 +1,37 @@
-body {
-    background-color: red;
+pre {
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: table;
+    width: 100%;
+    color: hsl(154 84% 70%);
+    text-shadow: 0 0 4px hsl(154 84% 70%);
+
+
 }
+
+pre#asciiText {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+
+}
+
+body {
+    background: hsl(154 50% 5%);
+
+    color: hsl(154 84% 70%);
+    text-shadow: 0 0 4px hsl(154 84% 70%);
+    font-family: monospace;
+    font-size: 1em;
+    overflow-y: auto;
+    /* Allows scrolling */
+    padding-bottom: 50px;
+    /* Adjust this value so it's more than the height of your fixed input container */
+}
+

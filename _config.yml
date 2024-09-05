@@ -1,1 +1,10 @@
+title: "M4GiK Software Portfolio"
+email: "michal.szczygiel@wp.pl"
+description: "Opis Twojej Strony"
+baseurl: ""
+url: "https://m4gik.github.io"
+author: "Michał Szczygieł"
+repository: "M4GiK/M4GiK.github.io"
 theme: jekyll-theme-slate
+exclude:
+  - src
