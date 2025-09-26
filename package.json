@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "description": "Portfolio page",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "compile": "tsc"
   },
   "author": "M4GiK",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "3.3.3"
+    "@types/jquery": "^3.5.30",
+    "jquery": "^3.7.1",
+    "prettier": "3.3.3",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "jquery.terminal": "^2.43.1"
   }
 }
