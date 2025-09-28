@@ -1,5 +1,112 @@
-# Ignore the entire _site directory
+# ==========================================
+# Jekyll & Static Site Files
+# ==========================================
 _site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
 
-# Ignore the entire node_modules directory
+# ==========================================
+# Node.js & npm
+# ==========================================
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ==========================================
+# Ruby & Bundler
+# ==========================================
+.bundle/
+vendor/
+Gemfile.lock
+
+# ==========================================
+# IDE & Editor Files
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# macOS System Files
+# ==========================================
+._*
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ==========================================
+# Windows System Files
+# ==========================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ==========================================
+# Linux System Files
+# ==========================================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==========================================
+# Temporary & Test Files
+# ==========================================
+*.tmp
+*.temp
+*.log
+*.cache
+test-completion.html
+
+# ==========================================
+# Unused Theme Directories
+# ==========================================
+m4gik-theme/
+
+# ==========================================
+# Build & Distribution
+# ==========================================
+dist/
+build/
+out/
+
+# ==========================================
+# Environment & Config
+# ==========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ==========================================
+# Backup Files
+# ==========================================
+*.bak
+*.backup
+*.old
+*.orig
