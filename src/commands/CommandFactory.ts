@@ -89,8 +89,6 @@ export class CommandFactory {
         this.commandConstructors.set('date', DateCommand);
         this.commandConstructors.set('whoami', WhoamiCommand);
         this.commandConstructors.set('clear', ClearCommand);
-
-        console.log(`CommandFactory: Registered ${this.commandConstructors.size} commands`);
     }
 
     /**
@@ -177,7 +175,6 @@ export class CommandFactory {
             console.error('Failed to create HelpCommand:', error);
         }
 
-        console.log(`CommandFactory: Created ${commands.size} command instances`);
         return commands;
     }
 }

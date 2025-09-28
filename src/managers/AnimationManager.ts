@@ -12,12 +12,36 @@ export interface IAnimationConfig {
     maxDurationMs?: number;
 }
 
+/**
+ * Singleton animation manager for handling text and terminal animations.
+ * This class provides centralized control over various animation effects used
+ * throughout the application, including ASCII art text writing, terminal text
+ * animation, and performance-optimized rendering techniques.
+ *
+ * Features:
+ * - Text writing animations with configurable delays
+ * - Optimized terminal text animation with batching
+ * - Performance considerations with duration caps
+ * - Scroll management during animations
+ */
 export class AnimationManager {
+    /** Singleton instance of the AnimationManager */
     private static instance: AnimationManager;
+    /** Logger instance for animation-related operations */
     private logger = Logger.getInstance();
 
+    /**
+     * Private constructor to enforce singleton pattern.
+     * Prevents direct instantiation of the class.
+     */
     private constructor() {}
 
+    /**
+     * Gets the singleton instance of AnimationManager.
+     * Creates a new instance if one doesn't exist, otherwise returns the existing instance.
+     *
+     * @returns The single AnimationManager instance
+     */
     static getInstance(): AnimationManager {
         if (!AnimationManager.instance) {
             AnimationManager.instance = new AnimationManager();
@@ -25,6 +49,16 @@ export class AnimationManager {
         return AnimationManager.instance;
     }
 
+    /**
+     * Animates text writing character by character on a target HTML element.
+     * Uses requestAnimationFrame for smooth animation with configurable delays
+     * and duration caps for performance. Handles scrolling behavior and cleanup.
+     *
+     * @param target - The HTML element to animate text into
+     * @param content - The text content to animate
+     * @param config - Animation configuration options
+     * @returns Promise that resolves when animation completes
+     */
     async animateTextWriting(
         target: HTMLElement,
         content: string,
@@ -51,7 +85,6 @@ export class AnimationManager {
         const estimatedDuration = contentArray.length * finalConfig.delay;
         const totalDurationMs = Math.min(maxDurationMs, Math.max(0, estimatedDuration));
 
-        console.log(`🎬 Starting logo animation (<= ${maxDurationMs}ms), characters: ${contentArray.length}`);
         this.logger.info(`Starting text animation for ${contentArray.length} characters`);
 
         if (maxDurationMs === 0 || totalDurationMs <= 50 || contentArray.length === 0) {
@@ -104,13 +137,27 @@ export class AnimationManager {
         });
     }
 
+    /**
+     * Animates text display in a jQuery Terminal instance using optimized batching.
+     * This method provides smooth terminal text animation by processing characters
+     * in batches and using setTimeout for consistent timing, rather than requestAnimationFrame
+     * which can be too fast for terminal text rendering.
+     *
+     * The algorithm handles newlines by creating separate terminal lines and updates
+     * existing lines incrementally for performance.
+     *
+     * @param terminalInstance - The jQuery Terminal instance to animate text into
+     * @param content - The text content to animate (can include newlines)
+     * @param config - Animation configuration options
+     * @returns Promise that resolves when animation completes
+     */
     async animateTerminalText(
         terminalInstance: any,
         content: string,
         config: Partial<IAnimationConfig> = {}
     ): Promise<void> {
         const finalConfig: IAnimationConfig = {
-            delay: 10,
+            delay: 10, // Even faster for smoother effect
             scrollToBottom: false,
             elementId: '',
             ...config
@@ -121,25 +168,56 @@ export class AnimationManager {
             return;
         }
 
-        const lines = content.split('\n');
-        this.logger.info(`Starting terminal animation for ${lines.length} lines`);
+        const chars = content.split('');
+        this.logger.info(`Starting optimized terminal animation for ${chars.length} characters`);
 
-        for (const line of lines) {
-            if (line.trim()) {
-                const chars = line.split('');
-                let currentText = '';
+        // Start with empty echo to create the line
+        const lineIndex = terminalInstance.echo('');
 
-                for (const char of chars) {
-                    await AsyncUtils.delay(finalConfig.delay);
-                    currentText += char;
+        // Optimized: Batch characters and use setTimeout-based approach for terminal
+        // (requestAnimationFrame would be too fast for terminal text)
+        const batchSize = Math.max(1, Math.floor(60 / (1000 / finalConfig.delay)));
+        let currentIndex = 0;
+
+        const animateBatch = async () => {
+            const batchEnd = Math.min(currentIndex + batchSize, chars.length);
+            let batchText = '';
+
+            // Build batch text
+            for (let i = currentIndex; i < batchEnd; i++) {
+                const char = chars[i];
+                if (char === '\n') {
+                    // Handle newline separately
+                    if (batchText.length > 0) {
+                        const currentContent = terminalInstance.get_output().split('\n');
+                        currentContent[currentContent.length - 1] += batchText;
+                        terminalInstance.update(currentContent.length - 1, currentContent[currentContent.length - 1]);
+                        terminalInstance.echo(''); // Add new line
+                        batchText = '';
+                    } else {
+                        terminalInstance.echo('');
+                    }
+                } else {
+                    batchText += char;
                 }
-
-                terminalInstance.echo(currentText);
-            } else {
-                terminalInstance.echo('');
             }
-        }
 
-        this.logger.info('Terminal animation completed');
+            // Update with remaining batch text
+            if (batchText.length > 0) {
+                const currentContent = terminalInstance.get_output().split('\n');
+                currentContent[currentContent.length - 1] += batchText;
+                terminalInstance.update(currentContent.length - 1, currentContent[currentContent.length - 1]);
+            }
+
+            currentIndex = batchEnd;
+
+            if (currentIndex < chars.length) {
+                await AsyncUtils.delay(finalConfig.delay);
+                await animateBatch();
+            }
+        };
+
+        await animateBatch();
+        this.logger.info('Optimized terminal animation completed');
     }
 }
