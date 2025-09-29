@@ -121,12 +121,12 @@ export class TerminalApplication {
      */
     calculateDynamicHeight() {
         const viewportHeight = window.innerHeight;
-        const headerHeight = 100;
-        const footerHeight = 50;
-        const margins = 40;
+        const headerHeight = 50; // Reduced for larger terminal
+        const footerHeight = 20; // Reduced for larger terminal
+        const margins = 20; // Reduced margins
         const availableHeight = viewportHeight - headerHeight - footerHeight - margins;
-        const minHeight = 300;
-        const maxHeight = viewportHeight * 0.8;
+        const minHeight = 400; // Increased min height
+        const maxHeight = viewportHeight - 100; // Use almost full height minus small reserves
         const calculatedHeight = Math.max(minHeight, Math.min(availableHeight, maxHeight));
         this.logger.info(`Calculated terminal height: ${calculatedHeight}px`);
         return calculatedHeight;
