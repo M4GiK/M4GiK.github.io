@@ -44,6 +44,9 @@ class Application {
         try {
             this.logger.info('Application starting...');
 
+            // Set terminal height before animation starts
+            this.terminalApp.updateTerminalHeight();
+
             // Initialize ASCII animation
             await this.terminalApp.initializeAnimation();
 

@@ -87,10 +87,13 @@ export class TerminalApplication {
         const currentDir = fileSystem.getCurrentDirectory();
         const shortDir = currentDir.replace('/portfolio', '~') || '/';
 
+        // Calculate dynamic height for terminal config
+        const calculatedHeight = this.calculateDynamicHeight();
+
         return {
             greetings: '',
             name: 'm4gik_terminal',
-            height: 400,
+            height: calculatedHeight,
             prompt: `guest@m4gik:${shortDir}$ `,
             history: true,
             historySize: 100,
@@ -153,13 +156,13 @@ export class TerminalApplication {
      */
     calculateDynamicHeight(): number {
         const viewportHeight = window.innerHeight;
-        const headerHeight = 50;  // Reduced for larger terminal
-        const footerHeight = 20;  // Reduced for larger terminal
-        const margins = 20;       // Reduced margins
+        const headerHeight = 30;  // Minimal header reserve
+        const footerHeight = 10;  // Minimal footer reserve
+        const margins = 10;       // Minimal margins
 
         const availableHeight = viewportHeight - headerHeight - footerHeight - margins;
-        const minHeight = 400;    // Increased min height
-        const maxHeight = viewportHeight - 100;  // Use almost full height minus small reserves
+        const minHeight = 500;    // Larger min height
+        const maxHeight = viewportHeight - 50;  // Use almost full viewport height
 
         const calculatedHeight = Math.max(minHeight, Math.min(availableHeight, maxHeight));
 
