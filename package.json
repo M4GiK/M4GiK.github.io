@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "compile": "tsc"
+    "compile": "tsc",
+    "compile:watch": "tsc --watch",
+    "build": "tsc && echo 'Build completed with source maps'",
+    "dev": "tsc --watch"
   },
   "author": "M4GiK",
   "license": "MIT",
