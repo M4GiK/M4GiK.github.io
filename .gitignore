@@ -93,7 +93,7 @@ m4gik-theme/
 dist/
 build/
 out/
-assets/
+assets/js/
 
 # ==========================================
 # Environment & Config
