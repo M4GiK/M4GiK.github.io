@@ -23,6 +23,7 @@ import { JokeCommand } from './JokeCommand.js';
 import { DateCommand } from './DateCommand.js';
 import { WhoamiCommand } from './WhoamiCommand.js';
 import { ClearCommand } from './ClearCommand.js';
+import { TreeCommand } from './TreeCommand.js';
 
 /**
  * Factory class for creating terminal command instances
@@ -89,6 +90,7 @@ export class CommandFactory {
         this.commandConstructors.set('date', DateCommand);
         this.commandConstructors.set('whoami', WhoamiCommand);
         this.commandConstructors.set('clear', ClearCommand);
+        this.commandConstructors.set('tree', TreeCommand);
     }
 
     /**

@@ -44,17 +44,21 @@ export class CatCommand extends BaseCommand {
         const content = fileSystem.readFile(filePath);
 
         // Handle various error conditions
+        if (!fileSystem.fileExists(filePath)) {
+            this.safeError(terminal, `cat: ${filePath}: No such file or directory`);
+            this.logger.warn(`File does not exist: ${filePath}`);
+            return;
+        }
+
+        if (fileSystem.isDirectory(filePath)) {
+            this.safeError(terminal, `cat: ${filePath}: Is a directory`);
+            this.logger.warn(`Attempted to cat a directory: ${filePath}`);
+            return;
+        }
+
         if (content === null) {
-            if (!fileSystem.fileExists(filePath)) {
-                this.safeError(terminal, `cat: ${filePath}: No such file or directory`);
-                this.logger.warn(`File does not exist: ${filePath}`);
-            } else if (fileSystem.isDirectory(filePath)) {
-                this.safeError(terminal, `cat: ${filePath}: Is a directory`);
-                this.logger.warn(`Attempted to cat a directory: ${filePath}`);
-            } else {
-                this.safeError(terminal, `cat: ${filePath}: Permission denied`);
-                this.logger.error(`Permission denied for file: ${filePath}`);
-            }
+            this.safeError(terminal, `cat: ${filePath}: File not readable`);
+            this.logger.warn(`File exists but has no readable content: ${filePath}`);
             return;
         }
 

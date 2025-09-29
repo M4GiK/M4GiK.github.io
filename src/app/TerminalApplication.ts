@@ -83,11 +83,15 @@ export class TerminalApplication {
      * @private
      */
     private getTerminalConfig(): ITerminalConfig {
+        const fileSystem = FileSystem.getInstance();
+        const currentDir = fileSystem.getCurrentDirectory();
+        const shortDir = currentDir.replace('/portfolio', '~') || '/';
+
         return {
             greetings: '',
             name: 'm4gik_terminal',
             height: 400,
-            prompt: 'guest@m4gik:~$ ',
+            prompt: `guest@m4gik:${shortDir}$ `,
             history: true,
             historySize: 100,
             scrollOnEcho: true,
@@ -103,7 +107,8 @@ export class TerminalApplication {
      * Creates command functions bound to the terminal instance for jQuery Terminal.
      * This method generates wrapper functions for each command that handle execution
      * and error catching. When a command is invoked through the terminal interface,
-     * it calls the corresponding ITerminalCommand's execute method.
+     * it checks for a command description file first, displays it, then calls the
+     * corresponding ITerminalCommand's execute method.
      *
      * @returns Object mapping command names to executable functions for jQuery Terminal
      * @private
@@ -115,6 +120,18 @@ export class TerminalApplication {
             terminalCommands[name] = function() {
                 const args = Array.from(arguments);
                 try {
+                    // Check for command description file and display it
+                    const descriptionPath = `/commands/${name}.md`;
+                    const fileSystem = FileSystem.getInstance();
+                    const description = fileSystem.readFile(descriptionPath);
+
+                    if (description) {
+                        // Display the command description
+                        this.echo(description);
+                        this.echo(''); // Add empty line for readability
+                    }
+
+                    // Execute the command
                     command.execute(this, ...args);
                 } catch (error) {
                     console.error(`Command execution error: ${error}`);
@@ -269,7 +286,7 @@ export class TerminalApplication {
         // If it's a command with arguments, check if it's a file system command
         const commandName = words[0];
 
-        if (['cd', 'ls', 'cat'].indexOf(commandName) !== -1) {
+        if (['cd', 'ls', 'cat', 'tree'].indexOf(commandName) !== -1) {
             const result = this.getFileSystemCompletions(commandName, currentWord);
             return result;
         }
@@ -314,7 +331,7 @@ export class TerminalApplication {
         }
 
         if (currentWord === '' || currentWord.startsWith('/')) {
-            completions.push('/home/', '/usr/', '/bin/', '/etc/');
+            completions.push('/portfolio/', '/documents/', '/projects/', '/tools/', '/commands/');
         }
 
         if (currentWord === '' || currentWord.startsWith('~')) {
@@ -341,8 +358,14 @@ export class TerminalApplication {
                         if (fileInfo.type === 'directory') {
                             completions.push(basePath + (basePath ? '/' : '') + item + '/');
                         } else {
-                            // For files, only add if it's not a cd command
-                            if (commandName !== 'cd') {
+                            // For files, filter based on command
+                            if (commandName === 'cat') {
+                                // For cat, only show files with readable content
+                                if (fileSystem.readFile(fullPath) !== null) {
+                                    completions.push(basePath + (basePath ? '/' : '') + item);
+                                }
+                            } else if (commandName !== 'cd') {
+                                // For other commands, show all files
                                 completions.push(basePath + (basePath ? '/' : '') + item);
                             }
                         }
@@ -362,8 +385,14 @@ export class TerminalApplication {
                         if (fileInfo.type === 'directory') {
                             completions.push(item + '/');
                         } else {
-                            // For files, only add if it's not a cd command
-                            if (commandName !== 'cd') {
+                            // For files, filter based on command
+                            if (commandName === 'cat') {
+                                // For cat, only show files with readable content
+                                if (fileSystem.readFile(fullPath) !== null) {
+                                    completions.push(item);
+                                }
+                            } else if (commandName !== 'cd') {
+                                // For other commands, show all files
                                 completions.push(item);
                             }
                         }

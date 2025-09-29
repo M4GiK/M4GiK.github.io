@@ -18,10 +18,10 @@ export class CdCommand extends BaseCommand {
     /**
      * Executes the cd command to change the current working directory
      * The command accepts an optional directory path argument. If no argument
-     * is provided, it defaults to the home directory ('~').
+     * is provided, it defaults to the portfolio directory ('~').
      *
      * Special handling includes:
-     * - '~' or empty string: Navigate to home directory (/home/m4gik)
+     * - '~' or empty string: Navigate to portfolio directory (/portfolio)
      * - '-': Not implemented (would typically go to previous directory)
      * - Relative or absolute paths: Navigate to specified directory
      *
@@ -32,7 +32,7 @@ export class CdCommand extends BaseCommand {
      * @param args - Command arguments, expects optional directory path
      */
     execute(terminal: any, ...args: string[]): void {
-        const directory = args[0] || '~';
+        const directory = (args[0] && typeof args[0] === 'string') ? args[0] : '~';
         const fileSystem = FileSystem.getInstance();
 
         let targetPath = directory;
@@ -41,8 +41,8 @@ export class CdCommand extends BaseCommand {
 
         // Handle special directory references
         if (directory === '~' || directory === '') {
-            targetPath = '/home/m4gik';
-            this.logger.info('Using home directory as target path');
+            targetPath = '/portfolio';
+            this.logger.info('Using portfolio directory as target path');
         } else if (directory === '-') {
             this.safeError(terminal, 'cd: no previous directory');
             this.logger.warn('Previous directory navigation not implemented');
@@ -55,10 +55,10 @@ export class CdCommand extends BaseCommand {
 
             // Update terminal prompt to reflect new directory
             const currentDir = fileSystem.getCurrentDirectory();
-            const shortDir = currentDir.replace('/home/m4gik', '~') || '/';
+            const shortDir = currentDir.replace('/portfolio', '~') || '/';
 
             if (terminal && typeof terminal.set_prompt === 'function') {
-                const newPrompt = `guest@m4gik-terminal:${shortDir}$ `;
+                const newPrompt = `guest@m4gik:${shortDir}$ `;
                 terminal.set_prompt(newPrompt);
                 this.logger.info(`Updated terminal prompt to: ${newPrompt}`);
             } else {

@@ -23,9 +23,10 @@ export class WhoamiCommand extends BaseCommand {
     execute(terminal: any, ...args: string[]): void {
         this.logger.info('Executing whoami command');
 
-        const username = 'guest@m4gik-terminal';
+        const username = ' - guest@m4gik';
+        const admin = ' - admin@m4gik';
 
-        this.safeEcho(terminal, username);
+        this.safeEcho(terminal, username + '\n' + admin);
 
         this.logger.info(`Whoami command completed, displayed: ${username}`);
     }
