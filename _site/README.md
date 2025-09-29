@@ -64,7 +64,7 @@ A modern, interactive terminal-based portfolio website built with Jekyll, TypeSc
    bundle install
    ```
 
-3. **Install Node.js dependencies (optional, for TypeScript):**
+3. **Install Node.js dependencies (optional, for TypeScript development):**
    ```bash
    npm install
    ```
@@ -79,19 +79,19 @@ bundle exec jekyll serve
 - Uses pre-compiled JavaScript
 - Fastest way to get started
 
-#### Option 2: With TypeScript Compilation
+#### Option 2: With TypeScript Compilation (Development)
 ```bash
 # Terminal 1: Compile TypeScript
-npm run compile
+npm run build
 
 # Terminal 2: Run Jekyll
 bundle exec jekyll serve
 ```
 
-#### Option 3: Development Mode
+#### Option 3: Development Mode with Watch
 ```bash
 # Terminal 1: Watch TypeScript changes
-tsc -w
+npm run dev
 
 # Terminal 2: Run Jekyll with live reload
 bundle exec jekyll serve --livereload
@@ -207,7 +207,7 @@ M4GiK.github.io/
 │   ├── css/
 │   │   └── styles.css  # Terminal styles & animations
 │   └── js/
-│       └── script.js   # Compiled JavaScript
+│       └── main.js     # Compiled JavaScript
 ├── src/                # TypeScript source
 │   ├── main.ts         # Application entry point
 │   ├── utils/          # Utility classes
@@ -232,10 +232,10 @@ M4GiK.github.io/
 ### TypeScript Compilation
 ```bash
 # One-time compilation
-npm run compile
+npm run build
 
 # Watch mode (auto-compile on changes)
-tsc -w
+npm run dev
 ```
 
 ### Jekyll Development
@@ -296,7 +296,7 @@ npm install
 # Szukaj błędów JavaScript
 
 # Sprawdź czy pliki są dostępne
-ls -la assets/js/script.js
+ls -la assets/js/main.js
 ls -la assets/css/styles.css
 
 # Wyczyść cache przeglądarki
@@ -330,7 +330,7 @@ tsc --noEmit --listFiles
 ```bash
 # Minifikacja JavaScript (jeśli potrzebna)
 npm install -g uglify-js
-uglifyjs assets/js/script.js -o assets/js/script.min.js
+uglifyjs assets/js/main.js -o assets/js/main.min.js
 ```
 
 #### **Testowanie na Różnych Przeglądarkach:**

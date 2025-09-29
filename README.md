@@ -105,24 +105,26 @@ bundle exec jekyll serve --livereload
 |---------|-------------|---------|
 | `help` | Show all available commands | `help` |
 | `about` | About M4GiK | `about` |
-| `skills` | Technical skills | `skills` |
-| `projects` | Recent projects | `projects` |
-| `contact` | Contact information | `contact` |
-| `social` | Social media links | `social` |
-| `resume` | Resume download | `resume` |
 | `blog` | Latest blog posts | `blog` |
-| `status` | Current status | `status` |
-| `echo` | Echo text back | `echo Hello World` |
 | `calc` | Simple calculator | `calc 2+3` |
 | `cat` | Display file contents | `cat README.md` |
 | `cd` | Change directory | `cd documents` |
-| `ls` | List directory contents | `ls [directory]` |
-| `pwd` | Print working directory | `pwd` |
-| `joke` | Random programming joke | `joke` |
-| `date` | Current date/time | `date` |
-| `whoami` | Current user | `whoami` |
-| `uptime` | System uptime | `uptime` |
 | `clear` | Clear terminal | `clear` |
+| `contact` | Contact information | `contact` |
+| `date` | Current date/time | `date` |
+| `echo` | Echo text back | `echo Hello World` |
+| `help` | Show all available commands | `help` |
+| `joke` | Random programming joke | `joke` |
+| `ls` | List directory contents | `ls [directory]` |
+| `projects` | Recent projects | `projects` |
+| `pwd` | Print working directory | `pwd` |
+| `resume` | Resume download | `resume` |
+| `skills` | Technical skills | `skills` |
+| `social` | Social media links | `social` |
+| `status` | Current status | `status` |
+| `tree` | Display directory tree | `tree [directory]` |
+| `uptime` | System uptime | `uptime` |
+| `whoami` | Current user | `whoami` |
 
 ### Terminal Features
 
@@ -203,28 +205,59 @@ M4GiK.github.io/
 │   └── footer.html     # Footer
 ├── _layouts/           # Jekyll layouts
 │   └── default.html    # Main layout
-├── assets/             # Static assets
-│   ├── css/
-│   │   └── styles.css  # Terminal styles & animations
-│   └── js/
-│       └── main.js     # Compiled JavaScript
+├── assets/             # Static assets (CSS files only, JS compiled)
+│   └── css/
+│       └── styles.css  # Terminal styles & animations
 ├── src/                # TypeScript source
 │   ├── main.ts         # Application entry point
-│   ├── utils/          # Utility classes
-│   │   ├── AsyncUtils.ts
-│   │   └── Logger.ts
-│   ├── managers/       # Manager classes
-│   │   └── AnimationManager.ts
-│   ├── commands/       # Command classes
+│   ├── app/            # Application logic
+│   │   └── TerminalApplication.ts
+│   ├── commands/       # Command implementations (23 command files)
+│   │   ├── AboutCommand.ts
 │   │   ├── BaseCommand.ts
+│   │   ├── BlogCommand.ts
+│   │   ├── CalcCommand.ts
+│   │   ├── CatCommand.ts
+│   │   ├── CdCommand.ts
+│   │   ├── ClearCommand.ts
+│   │   ├── CommandFactory.ts
+│   │   ├── ContactCommand.ts
+│   │   ├── DateCommand.ts
+│   │   ├── EchoCommand.ts
 │   │   ├── HelpCommand.ts
-│   │   └── index.ts
-│   └── app/            # Application logic
-│       └── TerminalApplication.ts
+│   │   ├── JokeCommand.ts
+│   │   ├── LsCommand.ts
+│   │   ├── index.ts
+│   │   ├── ProjectsCommand.ts
+│   │   ├── PwdCommand.ts
+│   │   ├── ResumeCommand.ts
+│   │   ├── SkillsCommand.ts
+│   │   ├── SocialCommand.ts
+│   │   ├── StatusCommand.ts
+│   │   ├── TreeCommand.ts
+│   │   └── UptimeCommand.ts
+│   ├── managers/       # Animation management
+│   │   └── AnimationManager.ts
+│   ├── types/          # TypeScript definitions
+│   │   └── jquery.terminal.d.ts
+│   └── utils/          # Utility classes
+│       ├── AsyncUtils.ts
+│       ├── FileContents.ts
+│       ├── FileStructure.ts
+│       ├── FileSystem.ts
+│       ├── interfaces.ts
+│       └── Logger.ts
+├── .github/            # GitHub Actions workflows
+│   └── workflows/
+│       └── github-pages.yml
 ├── _config.yml         # Jekyll configuration
+├── Gemfile             # Ruby dependencies
+├── Gemfile.lock        # Ruby lockfile
 ├── package.json        # Node.js dependencies
+├── package-lock.json   # Node lockfile
 ├── tsconfig.json       # TypeScript configuration
-└── README.md           # This file
+├── README.md           # This file
+└── index.md            # Jekyll main page
 ```
 
 ## 🛠️ Development
