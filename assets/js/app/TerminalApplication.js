@@ -60,10 +60,12 @@ export class TerminalApplication {
         const fileSystem = FileSystem.getInstance();
         const currentDir = fileSystem.getCurrentDirectory();
         const shortDir = currentDir.replace('/portfolio', '~') || '/';
+        // Calculate dynamic height for terminal config
+        const calculatedHeight = this.calculateDynamicHeight();
         return {
             greetings: '',
             name: 'm4gik_terminal',
-            height: 400,
+            height: calculatedHeight,
             prompt: `guest@m4gik:${shortDir}$ `,
             history: true,
             historySize: 100,
@@ -121,15 +123,25 @@ export class TerminalApplication {
      */
     calculateDynamicHeight() {
         const viewportHeight = window.innerHeight;
-        const headerHeight = 50; // Reduced for larger terminal
-        const footerHeight = 20; // Reduced for larger terminal
-        const margins = 20; // Reduced margins
-        const availableHeight = viewportHeight - headerHeight - footerHeight - margins;
-        const minHeight = 400; // Increased min height
-        const maxHeight = viewportHeight - 100; // Use almost full height minus small reserves
+        const logoElement = document.getElementById('asciiText');
+        const footerElement = document.querySelector('.collection.external.terminal');
+        const terminalElement = document.getElementById('terminal');
+        const logoHeight = logoElement ? logoElement.getBoundingClientRect().height : 0;
+        const footerHeight = footerElement ? footerElement.getBoundingClientRect().height : 0;
+        let verticalMargins = 0;
+        if (terminalElement) {
+            const cs = window.getComputedStyle(terminalElement);
+            const mt = parseFloat(cs.marginTop || '0');
+            const mb = parseFloat(cs.marginBottom || '0');
+            verticalMargins = (isNaN(mt) ? 0 : mt) + (isNaN(mb) ? 0 : mb);
+        }
+        const reserves = logoHeight + footerHeight + verticalMargins;
+        const availableHeight = viewportHeight - reserves;
+        const minHeight = 300;
+        const maxHeight = Math.max(0, viewportHeight - verticalMargins - 10);
         const calculatedHeight = Math.max(minHeight, Math.min(availableHeight, maxHeight));
-        this.logger.info(`Calculated terminal height: ${calculatedHeight}px`);
-        return calculatedHeight;
+        this.logger.info(`Calculated terminal height: ${Math.floor(calculatedHeight)}px (viewport=${viewportHeight}, logo=${logoHeight}, footer=${footerHeight}, margins=${verticalMargins})`);
+        return Math.floor(calculatedHeight);
     }
     /**
      * Updates the terminal element's height based on current viewport calculations.

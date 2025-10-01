@@ -35,6 +35,8 @@ class Application {
     async start() {
         try {
             this.logger.info('Application starting...');
+            // Set terminal height before animation starts
+            this.terminalApp.updateTerminalHeight();
             // Initialize ASCII animation
             await this.terminalApp.initializeAnimation();
             // Initialize terminal with the welcome animation
