@@ -284,7 +284,7 @@ body {
     box-sizing: border-box;
     /* Height will be calculated dynamically by JavaScript */
     min-height: 300px;
-    max-height: calc(100vh - 200px);
+    /* Allow JS to fully control height; no hard max-height cap */
 }
 
 /* Simple typing animation for terminal welcome message */
