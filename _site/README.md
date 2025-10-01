@@ -2,7 +2,7 @@
 
 A modern, interactive terminal-based portfolio website built with Jekyll, TypeScript, and jQuery Terminal. Features a professional command-line interface with smooth animations and responsive design.
 
-![Terminal Preview](https://via.placeholder.com/800x400/031e11/9acd32?text=M4GiK+Terminal+Portfolio)
+![Terminal Preview](https://M4GiK.github.io)
 
 ## ✨ Features
 
@@ -105,24 +105,26 @@ bundle exec jekyll serve --livereload
 |---------|-------------|---------|
 | `help` | Show all available commands | `help` |
 | `about` | About M4GiK | `about` |
-| `skills` | Technical skills | `skills` |
-| `projects` | Recent projects | `projects` |
-| `contact` | Contact information | `contact` |
-| `social` | Social media links | `social` |
-| `resume` | Resume download | `resume` |
 | `blog` | Latest blog posts | `blog` |
-| `status` | Current status | `status` |
-| `echo` | Echo text back | `echo Hello World` |
 | `calc` | Simple calculator | `calc 2+3` |
 | `cat` | Display file contents | `cat README.md` |
 | `cd` | Change directory | `cd documents` |
-| `ls` | List directory contents | `ls [directory]` |
-| `pwd` | Print working directory | `pwd` |
-| `joke` | Random programming joke | `joke` |
-| `date` | Current date/time | `date` |
-| `whoami` | Current user | `whoami` |
-| `uptime` | System uptime | `uptime` |
 | `clear` | Clear terminal | `clear` |
+| `contact` | Contact information | `contact` |
+| `date` | Current date/time | `date` |
+| `echo` | Echo text back | `echo Hello World` |
+| `help` | Show all available commands | `help` |
+| `joke` | Random programming joke | `joke` |
+| `ls` | List directory contents | `ls [directory]` |
+| `projects` | Recent projects | `projects` |
+| `pwd` | Print working directory | `pwd` |
+| `resume` | Resume download | `resume` |
+| `skills` | Technical skills | `skills` |
+| `social` | Social media links | `social` |
+| `status` | Current status | `status` |
+| `tree` | Display directory tree | `tree [directory]` |
+| `uptime` | System uptime | `uptime` |
+| `whoami` | Current user | `whoami` |
 
 ### Terminal Features
 
@@ -139,92 +141,37 @@ The terminal includes a virtual file system for exploring portfolio content:
 #### Directory Structure
 ```
 / (root)
-├── home/
-│   └── m4gik/          # Home directory
-│       ├── documents/  # Personal documents
-│       │   ├── notes.txt
-│       │   └── projects.txt
-│       ├── projects/   # Project folders
-│       │   ├── portfolio/
-│       │   ├── web-app/
-│       │   └── mobile-app/
-│       ├── README.md   # Portfolio README
-│       ├── resume.pdf  # Resume file
-│       └── about.txt   # About information
-├── usr/
-│   ├── bin/           # System commands
-│   └── share/         # Shared resources
-├── bin/               # Executable commands
-└── etc/               # Configuration files
-    ├── config.txt     # System config
-    └── settings.json  # Application settings
-```
-
-#### Navigation Examples
-```bash
-# List current directory contents
-ls
-
-# List specific directory
-ls documents
-
-# Change to documents directory
-cd documents
-
-# Display file contents
-cat notes.txt
-
-# Go back to parent directory
-cd ..
-
-# Go to home directory
-cd ~
-
-# Show current location
-pwd
-```
-
-#### Available Files
-- **README.md**: Portfolio introduction and information
-- **resume.pdf**: Resume download link and information
-- **about.txt**: Personal introduction and background
-- **notes.txt**: Personal notes and TODO items
-- **projects.txt**: Detailed project descriptions
-- **config.txt**: System configuration
-- **settings.json**: Application settings
-
-## 🏗️ Project Structure
-
-```
-M4GiK.github.io/
-├── _includes/           # Jekyll includes
-│   ├── logo.html       # ASCII logo
-│   ├── body.html       # Main content
-│   └── footer.html     # Footer
-├── _layouts/           # Jekyll layouts
-│   └── default.html    # Main layout
-├── assets/             # Static assets
-│   ├── css/
-│   │   └── styles.css  # Terminal styles & animations
-│   └── js/
-│       └── main.js     # Compiled JavaScript
-├── src/                # TypeScript source
-│   ├── main.ts         # Application entry point
-│   ├── utils/          # Utility classes
-│   │   ├── AsyncUtils.ts
-│   │   └── Logger.ts
-│   ├── managers/       # Manager classes
-│   │   └── AnimationManager.ts
-│   ├── commands/       # Command classes
-│   │   ├── BaseCommand.ts
-│   │   ├── HelpCommand.ts
-│   │   └── index.ts
-│   └── app/            # Application logic
-│       └── TerminalApplication.ts
-├── _config.yml         # Jekyll configuration
-├── package.json        # Node.js dependencies
-├── tsconfig.json       # TypeScript configuration
-└── README.md           # This file
+portfolio
+├── 📁 personal/
+    ├── 📄 bio.md
+    ├── 📄 interests.md
+    └── 📄 timeline.md
+├── 📁 skillsets/
+    ├── 📄 frontend.md
+    ├── 📄 backend.md
+    ├── 📄 tools.md
+    └── 📄 methodologies.md
+├── 📁 work-history/
+    ├── 📄 experience.md
+    ├── 📄 achievements.md
+    └── 📄 references.md
+├── 📁 code-examples/
+    ├── 📁 web-apps/
+    │   ├── 📄 portfolio-site.md
+    │   ├── 📄 ecommerce-platform.md
+    │   └── 📄 dashboard.md
+    ├── 📁 mobile-apps/
+    │   ├── 📄 ios-app.md
+    │   ├── 📄 android-app.md
+    │   └── 📄 cross-platform.md
+    ├── 📁 scripts/
+    │   ├── 📄 automation-tools.md
+    │   ├── 📄 build-scripts.md
+    │   └── 📄 utilities.md
+    └── 📁 libraries/
+    │   ├── 📄 open-source.md
+    │   ├── 📄 components.md
+    │   └── 📄 frameworks.md
 ```
 
 ## 🛠️ Development
