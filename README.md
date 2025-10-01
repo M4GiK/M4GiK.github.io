@@ -2,7 +2,7 @@
 
 A modern, interactive terminal-based portfolio website built with Jekyll, TypeScript, and jQuery Terminal. Features a professional command-line interface with smooth animations and responsive design.
 
-![Terminal Preview](https://via.placeholder.com/800x400/031e11/9acd32?text=M4GiK+Terminal+Portfolio)
+![Terminal Preview](https://M4GiK.github.io)
 
 ## ✨ Features
 
@@ -141,123 +141,37 @@ The terminal includes a virtual file system for exploring portfolio content:
 #### Directory Structure
 ```
 / (root)
-├── home/
-│   └── m4gik/          # Home directory
-│       ├── documents/  # Personal documents
-│       │   ├── notes.txt
-│       │   └── projects.txt
-│       ├── projects/   # Project folders
-│       │   ├── portfolio/
-│       │   ├── web-app/
-│       │   └── mobile-app/
-│       ├── README.md   # Portfolio README
-│       ├── resume.pdf  # Resume file
-│       └── about.txt   # About information
-├── usr/
-│   ├── bin/           # System commands
-│   └── share/         # Shared resources
-├── bin/               # Executable commands
-└── etc/               # Configuration files
-    ├── config.txt     # System config
-    └── settings.json  # Application settings
-```
-
-#### Navigation Examples
-```bash
-# List current directory contents
-ls
-
-# List specific directory
-ls documents
-
-# Change to documents directory
-cd documents
-
-# Display file contents
-cat notes.txt
-
-# Go back to parent directory
-cd ..
-
-# Go to home directory
-cd ~
-
-# Show current location
-pwd
-```
-
-#### Available Files
-- **README.md**: Portfolio introduction and information
-- **resume.pdf**: Resume download link and information
-- **about.txt**: Personal introduction and background
-- **notes.txt**: Personal notes and TODO items
-- **projects.txt**: Detailed project descriptions
-- **config.txt**: System configuration
-- **settings.json**: Application settings
-
-## 🏗️ Project Structure
-
-```
-M4GiK.github.io/
-├── _includes/           # Jekyll includes
-│   ├── logo.html       # ASCII logo
-│   ├── body.html       # Main content
-│   └── footer.html     # Footer
-├── _layouts/           # Jekyll layouts
-│   └── default.html    # Main layout
-├── assets/             # Static assets (CSS files only, JS compiled)
-│   └── css/
-│       └── styles.css  # Terminal styles & animations
-├── src/                # TypeScript source
-│   ├── main.ts         # Application entry point
-│   ├── app/            # Application logic
-│   │   └── TerminalApplication.ts
-│   ├── commands/       # Command implementations (23 command files)
-│   │   ├── AboutCommand.ts
-│   │   ├── BaseCommand.ts
-│   │   ├── BlogCommand.ts
-│   │   ├── CalcCommand.ts
-│   │   ├── CatCommand.ts
-│   │   ├── CdCommand.ts
-│   │   ├── ClearCommand.ts
-│   │   ├── CommandFactory.ts
-│   │   ├── ContactCommand.ts
-│   │   ├── DateCommand.ts
-│   │   ├── EchoCommand.ts
-│   │   ├── HelpCommand.ts
-│   │   ├── JokeCommand.ts
-│   │   ├── LsCommand.ts
-│   │   ├── index.ts
-│   │   ├── ProjectsCommand.ts
-│   │   ├── PwdCommand.ts
-│   │   ├── ResumeCommand.ts
-│   │   ├── SkillsCommand.ts
-│   │   ├── SocialCommand.ts
-│   │   ├── StatusCommand.ts
-│   │   ├── TreeCommand.ts
-│   │   └── UptimeCommand.ts
-│   ├── managers/       # Animation management
-│   │   └── AnimationManager.ts
-│   ├── types/          # TypeScript definitions
-│   │   └── jquery.terminal.d.ts
-│   └── utils/          # Utility classes
-│       ├── AsyncUtils.ts
-│       ├── FileContents.ts
-│       ├── FileStructure.ts
-│       ├── FileSystem.ts
-│       ├── interfaces.ts
-│       └── Logger.ts
-├── .github/            # GitHub Actions workflows
-│   └── workflows/
-│       └── github-pages.yml
-├── _config.yml         # Jekyll configuration
-├── Gemfile             # Ruby dependencies
-├── Gemfile.lock        # Ruby lockfile
-├── package.json        # Node.js dependencies
-├── package-lock.json   # Node lockfile
-├── tsconfig.json       # TypeScript configuration
-├── README.md           # This file
-└── index.md            # Jekyll main page
+portfolio
+├── 📁 personal/
+    ├── 📄 bio.md
+    ├── 📄 interests.md
+    └── 📄 timeline.md
+├── 📁 skillsets/
+    ├── 📄 frontend.md
+    ├── 📄 backend.md
+    ├── 📄 tools.md
+    └── 📄 methodologies.md
+├── 📁 work-history/
+    ├── 📄 experience.md
+    ├── 📄 achievements.md
+    └── 📄 references.md
+├── 📁 code-examples/
+    ├── 📁 web-apps/
+    │   ├── 📄 portfolio-site.md
+    │   ├── 📄 ecommerce-platform.md
+    │   └── 📄 dashboard.md
+    ├── 📁 mobile-apps/
+    │   ├── 📄 ios-app.md
+    │   ├── 📄 android-app.md
+    │   └── 📄 cross-platform.md
+    ├── 📁 scripts/
+    │   ├── 📄 automation-tools.md
+    │   ├── 📄 build-scripts.md
+    │   └── 📄 utilities.md
+    └── 📁 libraries/
+    │   ├── 📄 open-source.md
+    │   ├── 📄 components.md
+    │   └── 📄 frameworks.md
 ```
 
 ## 🛠️ Development
